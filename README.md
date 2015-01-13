@@ -23,20 +23,20 @@ An initializer will be created if you do not have one.
 rails g webhookr:prontoforms:init *initializer_name* -s
 ```
 
-Run the generator to create an example file to handle MailParserio webhooks.
+Run the generator to create an example file to handle ProntoForms webhooks.
 
 ```console
 rails g webhookr:prontoforms:example_hooks
 ```
 
-Or create a MailParserio handler class for any event that you want to handle. For example
+Or create a ProntoForms handler class for any event that you want to handle. For example
 to handle unsubscribes you would create a class as follows:
 
 ```ruby
-class MailParserioHooks
-  def on_unsubscribe(incoming)
+class ProntoFormsHooks
+  def on_event(incoming)
     # Your custom logic goes here.
-    User.unsubscribe_newletter(incoming.payload.data.email)
+
   end
 end
 ```
@@ -44,14 +44,14 @@ end
 For a complete list of events, and the payload format, see below.
 
 Edit config/initializers/*initializer_name* and change the commented line to point to
-your custom Prontoforms event handling class. If your class was called *MailParserioHooks*
+your custom Prontoforms event handling class. If your class was called *ProntoFormsHooks*
 the configuration line would look like this:
 
 ```ruby
-  Webhookr::Prontoforms::Adapter.config.callback = MailParserioHooks
+  Webhookr::Prontoforms::Adapter.config.callback = ProntoFormsHooks
 ```
 
-To see the list of MailParserio URLs for your application can use run the provided webhookr rake task:
+To see the list of ProntoForms URLs for your application can use run the provided webhookr rake task:
 
 ```console
 rake webhookr:services

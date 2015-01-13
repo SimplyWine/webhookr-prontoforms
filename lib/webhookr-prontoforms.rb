@@ -28,7 +28,7 @@ module Webhookr
       private
 
       def parse(raw_response)
-        JSON.parse(raw_response)
+        Rack::Utils.parse_nested_query(raw_response)
       end
 
     end
